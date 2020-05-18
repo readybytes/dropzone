@@ -2110,7 +2110,7 @@ function (_Emitter) {
 
       fileReader.readAsDataURL(file);
     } // `mockFile` needs to have these attributes:
-    // 
+    //
     //     { name: 'name', size: 12345, imageUrl: '' }
     //
     // `callback` will be invoked when the image has been downloaded and displayed.
@@ -2964,7 +2964,11 @@ function (_Emitter) {
         var chunk = this._getChunk(files[0], xhr);
 
         if (chunk.retries++ < this.options.retryChunksLimit) {
-          this._uploadData(files, [chunk.dataBlock]);
+          //add delay if network fails
+          let delay = (chunk.retries * 1000 * 3) % 60
+          setTimeout(() => {
+            this._uploadData(files, [chunk.dataBlock]);
+          }, delay);
 
           return;
         } else {
