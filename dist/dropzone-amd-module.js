@@ -2713,7 +2713,7 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
         if (chunk.retries++ < this.options.retryChunksLimit) {
           //add delay if network fails
           console.log("Retrie count :", chunk.retries);
-          var delay = chunk.retries * 1000 * 3;
+          var delay = 1000 * (chunk.retries * 3 % 60);
           console.log("Delay : ", delay);
           setTimeout(function () {
             console.log('Trigger Uploading');
