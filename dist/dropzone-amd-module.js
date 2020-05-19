@@ -2712,14 +2712,14 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
 
         if (chunk.retries++ < this.options.retryChunksLimit) {
           //add delay if network fails
-          console.log("Chunk Size-->>", chunk);
-          var delay = chunk.retries * 1000 * 3 % 60;
-          console.log("Delay -->", delay);
+          console.log("Retrie count :", chunk.retries);
+          var delay = chunk.retries * 1000 * 3;
+          console.log("Delay : ", delay);
           setTimeout(function () {
-            console.log('Timeout');
+            console.log('Trigger Uploading');
 
             _this18._uploadData(files, [chunk.dataBlock]);
-          }, 6000);
+          }, delay);
           return;
         } else {
           console.warn('Retried this chunk too often. Giving up.');
